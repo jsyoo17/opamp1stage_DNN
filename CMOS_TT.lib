@@ -1,0 +1,92 @@
+******************************************************************
+* MOSIS PARAMETRIC TEST RESULTS
+* RUN: T47R (MM_NON-EPI)        VENDOR: TSMC
+* TECHNOLOGY: SCN018            FEATURE SIZE: 0.18 microns
+*INTRODUCTION: This report contains the lot average results obtained by MOSIS
+*              from measurements of MOSIS test structures on each wafer of
+*              this fabrication lot. SPICE parameters obtained from similar
+*              measurements on a selected wafer are also attached.
+*
+* COMMENTS: DSCN6M018_TSMC
+*
+* T47R SPICE BSIM3 VERSION 3.1 PARAMETERS
+* SPICE 3f5 Level 8, Star-HSPICE Level 49, UTMOST Level 8
+* DATE: Oct  4/04
+* LOT: T47R                  WAF: 5006
+* Temperature_parameters=Default
+******************************************************************
+* Temperature_parameters=Default
+.MODEL nch NMOS (                                LEVEL   = 49
++VERSION = 3.1            TNOM    = 27             TOX     = 4.1E-9
++XJ      = 1E-7           NCH     = 2.3549E17      VTH0    = 0.3737307
++K1      = 0.5820621      K2      = 4.082421E-3    K3      = 0.2760696
++K3B     = 0.9100238      W0      = 1E-7           NLX     = 1.593767E-7
++DVT0W   = 0              DVT1W   = 0              DVT2W   = 0
++DVT0    = 1.4658846      DVT1    = 0.4320994      DVT2    = 0.0332334
++U0      = 274.473545     UA      = -1.387034E-9   UB      = 2.512101E-18
++UC      = 8.277969E-11   VSAT    = 1.097766E5     A0      = 2
++AGS     = 0.4676555      B0      = 3.692821E-7    B1      = 5E-6
++KETA    = -8.925458E-3   A1      = 0              A2      = 0.8071253
++RDSW    = 105            PRWG    = 0.4550927      PRWB    = -0.2
++WR      = 1              WINT    = 1.598159E-8    LINT    = 1.79089E-8
++XL      = 0              XW      = -1E-8          DWG     = -5.61752E-10
++DWB     = 3.071688E-9    VOFF    = -0.0957878     NFACTOR = 2.1803476
++CIT     = 0              CDSC    = 2.4E-4         CDSCD   = 0
++CDSCB   = 0              ETA0    = 2.924118E-3    ETAB    = 9.395682E-6
++DSUB    = 0.0142874      PCLM    = 0.7444821      PDIBLC1 = 0.2282331
++PDIBLC2 = 2.196765E-3    PDIBLCB = -0.1           DROUT   = 0.8127812
++PSCBE1  = 4.484851E10    PSCBE2  = 2.583382E-9    PVAG    = 9.964782E-3
++DELTA   = 0.01           RSH     = 6.6            MOBMOD  = 1
++PRT     = 0              UTE     = -1.5           KT1     = -0.11
++KT1L    = 0              KT2     = 0.022          UA1     = 4.31E-9
++UB1     = -7.61E-18      UC1     = -5.6E-11       AT      = 3.3E4
++WL      = 0              WLN     = 1              WW      = 0
++WWN     = 1              WWL     = 0              LL      = 0
++LLN     = 1              LW      = 0              LWN     = 1
++LWL     = 0              CAPMOD  = 2              XPART   = 0.5
++CGDO    = 8.92E-10       CGSO    = 8.92E-10       CGBO    = 0
++CJ      = 9.668699E-4    PB      = 0.8            MJ      = 0.378683
++CJSW    = 2.637731E-10   PBSW    = 0.8            MJSW    = 0.1467544
++CJSWG   = 3.3E-10        PBSWG   = 0.8            MJSWG   = 0.1467544
++CF      = 0              PVTH0   = -8.172704E-4   PRDSW   = -2.2327482
++PK2     = 9.833889E-4    WKETA   = -3.074167E-3   LKETA   = -4.145282E-3
++PU0     = 2.4494431      PUA     = -8.58632E-12   PUB     = 0
++PVSAT   = 1.496808E3     PETA0   = 1.003159E-4    PKETA   = -9.677218E-4    )
+*
+.MODEL pch PMOS (                                LEVEL   = 49
++VERSION = 3.1            TNOM    = 27             TOX     = 4.1E-9
++XJ      = 1E-7           NCH     = 4.1589E17      VTH0    = -0.3873434
++K1      = 0.5809306      K2      = 0.0260585      K3      = 1.6157776
++K3B     = 6.1744172      W0      = 1E-6           NLX     = 9.276559E-8
++DVT0W   = 0              DVT1W   = 0              DVT2W   = 0
++DVT0    = 0.5138528      DVT1    = 0.2438076      DVT2    = 0.1
++U0      = 112.3037309    UA      = 1.402775E-9    UB      = 1.101338E-21
++UC      = -1E-10         VSAT    = 1.856584E5     A0      = 1.6493753
++AGS     = 0.3504524      B0      = 3.546982E-7    B1      = 1.661711E-6
++KETA    = 0.0133623      A1      = 0.5365271      A2      = 0.423121
++RDSW    = 240.2816954    PRWG    = 0.5            PRWB    = -0.5
++WR      = 1              WINT    = 1.217772E-9    LINT    = 3.063969E-8
++XL      = 0              XW      = -1E-8          DWG     = -6.598362E-9
++DWB     = 4.924108E-9    VOFF    = -0.0919169     NFACTOR = 1.8235492
++CIT     = 0              CDSC    = 2.4E-4         CDSCD   = 0
++CDSCB   = 0              ETA0    = 0.0273283      ETAB    = -0.0987178
++DSUB    = 1.007542       PCLM    = 2.3681385      PDIBLC1 = 7.649054E-4
++PDIBLC2 = 0.0276113      PDIBLCB = -1E-3          DROUT   = 0
++PSCBE1  = 3.208268E9     PSCBE2  = 9.284769E-10   PVAG    = 15
++DELTA   = 0.01           RSH     = 7.6            MOBMOD  = 1
++PRT     = 0              UTE     = -1.5           KT1     = -0.11
++KT1L    = 0              KT2     = 0.022          UA1     = 4.31E-9
++UB1     = -7.61E-18      UC1     = -5.6E-11       AT      = 3.3E4
++WL      = 0              WLN     = 1              WW      = 0
++WWN     = 1              WWL     = 0              LL      = 0
++LLN     = 1              LW      = 0              LWN     = 1
++LWL     = 0              CAPMOD  = 2              XPART   = 0.5
++CGDO    = 6.52E-10       CGSO    = 6.52E-10       CGBO    = 0
++CJ      = 1.157155E-3    PB      = 0.8468461      MJ      = 0.4067788
++CJSW    = 2.261546E-10   PBSW    = 0.8            MJSW    = 0.3358244
++CJSWG   = 4.22E-10       PBSWG   = 0.8            MJSWG   = 0.3358244
++CF      = 0              PVTH0   = 1.029389E-3    PRDSW   = 2.3574697
++PK2     = 8.223442E-4    WKETA   = 0.0334706      LKETA   = -2.800493E-3
++PU0     = -1.2855336     PUA     = -5.06649E-11   PUB     = 1E-21
++PVSAT   = 50             PETA0   = 1E-4           PKETA   = 5.400491E-4     )
+*
