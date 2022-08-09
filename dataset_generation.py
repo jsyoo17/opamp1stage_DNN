@@ -83,14 +83,15 @@ perf=simulate(opamp)
 print(perf)
 
 ## CSV Generation Parameters
-W1range=np.round(np.arange(1e-6,11e-6,1e-6),10)
-W3range=np.round(np.arange(0.3e-6,5e-6,0.3e-6),10)
-W5range=np.round(np.arange(2e-6,11e-6,2e-6),10)
+W1range=np.round(np.arange(1e-6,11e-6,0.3e-6),10)
+W3range=np.round(np.arange(0.3e-6,5e-6,0.2e-6),10)
+W5range=np.round(np.arange(2e-6,11e-6,1e-6),10)
 W6range=W5range
+datasetcnt=len(W1range)*len(W3range)*len(W5range)*len(W6range)
 
 ## Dataset Generation
 itercnt=0
-with open('dataset.csv', 'w') as f:
+with open('largedataset.csv', 'w') as f:
     # title
     f.write('w1,w2,w3,w4,w5,w6,')
     for key in perf.keys():
@@ -110,7 +111,7 @@ with open('dataset.csv', 'w') as f:
                     M6.width=w6
 
                     if (1+itercnt)%100==0:
-                        print(f'sim {itercnt+1}')
+                        print(f'sim {itercnt+1}/{datasetcnt}')
                     try:
                         perf=simulate(opamp)
                         f.write(f'{w1},{w2},{w3},{w4},{w5},{w6},')

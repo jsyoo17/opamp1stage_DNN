@@ -7,6 +7,7 @@ train NN model 2 takes performances as input and opamp size parameters as output
 loss function compares the following two values:
  - performance calculation using predicted opamp size parameters
  - performance that is in dataset csv file (same as the input of the NN)
+ loss is multiplied by 2 when negative value is predicted?
 '''
 # todo: some consistancy to variable name
 
@@ -14,6 +15,16 @@ loss function compares the following two values:
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+
+# pyspice import
+import PySpice.Logging.Logging as Logging
+logger = Logging.setup_logging()
+from PySpice.Spice.Netlist import Circuit
+from PySpice.Unit import *
+from PySpice.Spice.Library import SpiceLibrary
+
+# import simulation function
+from simulation import simulate
 
 # pytorch import
 import torch
@@ -26,6 +37,7 @@ print(dev)
 
 ## Dataset Loader
 # os.chdir(os.path.dirname(__file__))     # change directory to where current file is
+spice_library = SpiceLibrary('./')      # use TSMC 180nm library file (measured)
 
 class LoadData(Dataset):
     def __init__(self, filename):
@@ -83,7 +95,7 @@ Normalization process
 Normalization layer before input layer and after output layer when model definition
 uses mean and std values found in this section
 '''
-x1000=data.getrand(1000)[0]
+x1000=data.getrand(1000)[0]; x1000[:,-1]=torch.log10(x1000[:,-1])   # log10 GBP before normalization
 xstd=torch.std(x1000,axis=0)
 xmean=torch.mean(x1000,axis=0)
 y1000=data.getrand(1000)[1]
@@ -111,6 +123,7 @@ class MODEL(nn.Module):
         self.outlayer=nn.Linear(in_features=16, out_features=6)
 
     def forward(self, x):
+        x[:,-1]=torch.log10(x[:,-1])    # log10 GBP before normalization
         in_norm=(x-xmean)/xstd
         out = self.hidden(in_norm)
         out = self.outlayer(out)
@@ -138,7 +151,8 @@ for epoch in range(EPOCH):
         opt.zero_grad()         # clear gradient
         batch_x=batch_x.to(dev); batch_y=batch_y.to(dev)
         pred=model(batch_x)
-        loss=loss_fn(pred, batch_y)
+        npred=(pred-ymean)/ystd; nbatch_y=(batch_y-ymean)/ystd  # normalization before loss
+        loss=loss_fn(npred, nbatch_y)
         loss.backward()         # Backward Propagation: update NN weight and bias
         opt.step()              # next step for optimizer
 
@@ -150,7 +164,8 @@ for epoch in range(EPOCH):
     for batch_idx, (batch_x, batch_y) in enumerate(validdata):
         batch_x=batch_x.to(dev); batch_y=batch_y.to(dev)
         pred=model(batch_x)
-        loss=loss_fn(pred, batch_y)
+        npred=(pred-ymean)/ystd; nbatch_y=(batch_y-ymean)/ystd  # normalization before loss
+        loss=loss_fn(npred, nbatch_y)
 
         # to keep data
         meanloss.append(loss.detach().numpy())
@@ -160,7 +175,8 @@ for epoch in range(EPOCH):
 for batch_idx, (batch_x, batch_y) in enumerate(testdata):
     batch_x=batch_x.to(dev); batch_y=batch_y.to(dev)
     pred=model(batch_x)
-    loss=loss_fn(pred,batch_y)
+    npred=(pred-ymean)/ystd; nbatch_y=(batch_y-ymean)/ystd  # normalization before loss
+    loss=loss_fn(npred,nbatch_y)
     meanloss.append(loss.detach().numpy())
 
 testloss=np.mean(meanloss)
